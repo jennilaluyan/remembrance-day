@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import Yopi from "./assets/opa-yopi.jpg"
-import Eko from "./assets/pa-eko.jpg"
+import Yopi from './assets/opa-yopi.jpg';
+import Eko from './assets/pa-eko.jpg';
 
 // --- FIREBASE IMPORTS ---
-// Mengimpor fungsi-fungsi yang dibutuhkan dari Firebase SDK
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "firebase/firestore";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 
 // --- KONFIGURASI FIREBASE ---
-// TODO: Ganti semua nilai di bawah ini dengan konfigurasi dari proyek Firebase Anda.
+// Ganti nilai placeholder dengan konfigurasi dari proyek Firebase Anda.
 // Anda bisa mendapatkan ini dari Pengaturan Proyek (Project settings) di Firebase console.
 const firebaseConfig = {
-  apiKey: "AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXX",
-  authDomain: "your-project-id.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-project-id.appspot.com",
-  messagingSenderId: "1234567890",
-  appId: "1:1234567890:web:xxxxxxxxxxxxxxxxx"
+  apiKey: "AIzaSyCSWg2-y0BLu_l8kNT_fw_PWsLpimOKYhc",
+  authDomain: "remembrance-day-dbb60.firebaseapp.com",
+  projectId: "remembrance-day-dbb60",
+  storageBucket: "remembrance-day-dbb60.firebasestorage.app",
+  messagingSenderId: "354276902979",
+  appId: "1:354276902979:web:958ac80b961821c7ed6cf6",
+  measurementId: "G-V3EER7NV2D"
 };
 
 // Inisialisasi Firebase dan service yang akan digunakan
@@ -30,7 +30,7 @@ const auth = getAuth(app);
 
 
 // --- ICONS (SVG) ---
-// Komponen-komponen ikon Anda sudah bagus, tidak ada perubahan di sini.
+// Tidak ada perubahan, sudah bagus.
 const MapPin = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block w-5 h-5 mr-2">
     <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
@@ -84,43 +84,25 @@ const SectionTitle = ({ children, className = '' }) => (
 const HeroSection = () => (
   <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[#F6F8D5] text-[#205781] p-6 relative overflow-hidden">
     <div className="absolute inset-0 bg-gradient-to-br from-[#98D2C0]/10 via-transparent to-[#4F959D]/10"></div>
-    <motion.div
-      className="text-center z-10"
-      initial={{ opacity: 0, y: -30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 0.5 }}
-    >
-      <h1 className="font-serif text-4xl md:text-5xl font-bold tracking-tight mt-6">
-        Dalam Kenangan Penuh Kasih
-      </h1>
+    <motion.div className="text-center z-10" initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5 }}>
+      <h1 className="font-serif text-4xl md:text-5xl font-bold tracking-tight mt-6">Dalam Kenangan Penuh Kasih</h1>
     </motion.div>
-    <motion.div
-      className="relative flex flex-col md:flex-row gap-6 md:gap-10 mt-8 z-10"
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1, delay: 1 }}
-    >
+    <motion.div className="relative flex flex-col md:flex-row gap-6 md:gap-10 mt-8 z-10" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 1 }}>
       <div className="text-center p-4">
-        {/* Mengganti gambar lokal dengan placeholder. Ganti URL ini dengan link gambar Anda. */}
+        {/* Menggunakan URL placeholder untuk gambar. Anda bisa menggantinya dengan URL gambar Anda sendiri. */}
         <img src={Yopi} alt="Joppy Hendrik Langi" className="w-56 h-80 md:w-64 md:h-96 object-cover rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-300 border-4 border-white" />
         <h3 className="font-serif text-2xl mt-4">Joppy Langi</h3>
         <p className="font-sans text-[#4F959D]">✞ 27 April 2015</p>
         <p className="font-sans text-[#4F959D]">Peringatan 10 Tahun</p>
       </div>
       <div className="text-center p-4">
-        {/* Mengganti gambar lokal dengan placeholder. Ganti URL ini dengan link gambar Anda. */}
         <img src={Eko} alt="Victor Elko Langi" className="w-56 h-80 md:w-64 md:h-96 object-cover rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-300 border-4 border-white" />
         <h3 className="font-serif text-2xl mt-4">Elko Langi</h3>
         <p className="font-sans text-[#4F959D]">✞ 24 April 2024</p>
         <p className="font-sans text-[#4F959D]">Peringatan 1 Tahun</p>
       </div>
     </motion.div>
-    <motion.p
-      className="mt-7 max-w-2xl text-center text-md md:text-lg font-sans text-[#4F959D] z-10"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1, delay: 1.5 }}
-    >
+    <motion.p className="mt-7 max-w-2xl text-center text-md md:text-lg font-sans text-[#4F959D] z-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.5 }}>
       Dengan penuh kasih, kami mengundang Anda untuk bersama-sama hadir dalam acara peringatan untuk Joppy & Elko Langi.
     </motion.p>
   </div>
@@ -244,7 +226,8 @@ const RSVPForm = ({ onRsvpSubmit }) => {
 const GuestMessages = ({ messages }) => {
   const marqueeStyle = `@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } } .animate-scroll { animation: scroll 40s linear infinite; }`;
   if (!messages || messages.length === 0) return null;
-  const isScrolling = messages.length > 3;
+  // EDIT: Ubah kondisi agar selalu scrolling jika ada pesan
+  const isScrolling = true;
   const displayMessages = isScrolling ? [...messages, ...messages] : messages;
   return (
     <Section className="bg-[#ffffff] !py-12">
@@ -301,7 +284,6 @@ const Footer = () => {
 };
 
 // --- Komponen-komponen untuk Halaman Admin & Routing ---
-
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -346,7 +328,7 @@ const ProtectedRoute = ({ user, children }) => {
   return children;
 };
 
-const AdminPage = ({ rsvps, onDelete }) => {
+const AdminPage = ({ rsvps }) => {
   const messages = rsvps.filter(rsvp => rsvp.message && rsvp.message.trim() !== '');
   const totalAttending = rsvps.filter(r => r.attendance === 'Hadir').reduce((sum, rsvp) => sum + (rsvp.guests || 0), 0);
 
@@ -439,10 +421,15 @@ export default function App() {
       const rsvpSnapshot = await getDocs(rsvpQuery);
       const rsvpList = rsvpSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setRsvps(rsvpList);
-      const messageList = rsvpList.filter(rsvp => rsvp.message && rsvp.message.trim() !== '');
+      let messageList = rsvpList.filter(rsvp => rsvp.message && rsvp.message.trim() !== '');
       setMessages(messageList);
     } catch (error) {
       console.error("Gagal mengambil data:", error);
+      // Fallback jika gagal fetch data
+      setMessages([
+        { id: 'gagal1', name: 'Keluarga Sahabat', message: 'Semoga keluarga yang ditinggalkan diberi kekuatan dan ketabahan.' },
+        { id: 'gagal2', name: 'Rekan Kerja', message: 'Turut berduka cita yang mendalam.' },
+      ]);
     } finally {
       setLoading(false);
     }
