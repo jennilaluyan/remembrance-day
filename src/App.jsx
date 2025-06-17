@@ -91,19 +91,19 @@ const HeroSection = () => (
       <div className="text-center p-4">
         {/* Menggunakan URL placeholder untuk gambar. Anda bisa menggantinya dengan URL gambar Anda sendiri. */}
         <img src={Yopi} alt="Joppy Hendrik Langi" className="w-56 h-80 md:w-64 md:h-96 object-cover rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-300 border-4 border-white" />
-        <h3 className="font-serif text-2xl mt-4">Joppy Langi</h3>
-        <p className="font-sans text-[#4F959D]">✞ 27 April 2015</p>
+        <h3 className="font-serif text-2xl mt-4">Joppy Hendrik Langi</h3>
+        <p className="font-sans text-[#4F959D]">✞ 27 Maret 2015</p>
         <p className="font-sans text-[#4F959D]">Peringatan 10 Tahun</p>
       </div>
       <div className="text-center p-4">
         <img src={Eko} alt="Victor Elko Langi" className="w-56 h-80 md:w-64 md:h-96 object-cover rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-300 border-4 border-white" />
-        <h3 className="font-serif text-2xl mt-4">Elko Langi</h3>
+        <h3 className="font-serif text-2xl mt-4">Victor Elko Langi</h3>
         <p className="font-sans text-[#4F959D]">✞ 24 April 2024</p>
         <p className="font-sans text-[#4F959D]">Peringatan 1 Tahun</p>
       </div>
     </motion.div>
     <motion.p className="mt-7 max-w-2xl text-center text-md md:text-lg font-sans text-[#4F959D] z-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.5 }}>
-      Dengan penuh kasih, kami mengundang Anda untuk bersama-sama hadir dalam acara peringatan untuk Joppy & Elko Langi.
+      Acara peringatan meninggalnya yang terkasih Alm. Joppy Langi (10 tahun) dan Alm. Victor Elko Langi (1 tahun)
     </motion.p>
   </div>
 );
@@ -264,7 +264,7 @@ const Footer = () => {
     setTimeout(() => setCopySuccess(''), 3000);
   };
   const shareToWhatsApp = () => {
-    const message = encodeURIComponent(`Dengan penuh kasih, kami mengundang Anda untuk hadir dalam acara peringatan untuk Joppy & Elko Langi. Info selengkapnya: ${window.location.href}`);
+    const message = encodeURIComponent(`Dengan penuh kasih, kami mengundang Anda untuk hadir dalam acara peringatan untuk Alm. Joppy Langi & Alm. Elko Langi. Info selengkapnya: ${window.location.href}`);
     window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
   };
   return (
