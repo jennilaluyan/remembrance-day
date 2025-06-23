@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { motion, AnimatePresence } from 'framer-motion';
 import Yopi from './assets/opa-yopi.jpg';
 import Eko from './assets/pa-eko.jpg';
+import Flower from './assets/place-and-date-icon.png'
 
 // --- FIREBASE IMPORTS ---
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "firebase/firestore";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { div } from 'framer-motion/client';
 
 
 // --- KONFIGURASI FIREBASE ---
@@ -74,39 +76,162 @@ const Section = ({ children, className = '' }) => (
   </motion.section>
 );
 
-const SectionTitle = ({ children, className = '' }) => (
-  <h2 className={`font-serif text-4xl md:text-5xl font-bold text-center mb-12 text-[#205781] ${className}`}>
+const SectionTitle = ({ children, className = '', textColor }) => (
+  <h2 className={`font-serif text-center mb-16 ${className}`}>
     {children}
   </h2>
 );
 
 // --- UI COMPONENTS ---
 const HeroSection = () => (
-  <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[#F6F8D5] text-[#205781] p-6 relative overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-br from-[#98D2C0]/10 via-transparent to-[#4F959D]/10"></div>
-    <motion.div className="text-center z-10" initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5 }}>
-      <h1 className="font-serif text-4xl md:text-5xl font-bold tracking-tight mt-6">Dalam Kenangan Penuh Kasih</h1>
-    </motion.div>
-    <motion.div className="relative flex flex-col md:flex-row gap-6 md:gap-10 mt-8 z-10" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 1 }}>
-      <div className="text-center p-4">
-        {/* Menggunakan URL placeholder untuk gambar. Anda bisa menggantinya dengan URL gambar Anda sendiri. */}
-        <img src={Yopi} alt="Joppy Hendrik Langi" className="w-56 h-80 md:w-64 md:h-96 object-cover rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-300 border-4 border-white" />
-        <h3 className="font-serif text-2xl mt-4">Joppy Hendrik Langi</h3>
-        <p className="font-sans text-[#4F959D]">✞ 27 Maret 2015</p>
-        <p className="font-sans text-[#4F959D]">Peringatan 10 Tahun</p>
+  <div>
+    {/* Viktor Langi */}
+    <div className="relative h-screen font-serif text-[#1b1622]">
+      {/* Bagian background 2 warna */}
+      <div className="h-full flex flex-col">
+        <div className="h-1/2 bg-[#1b1622]"></div>
+        <div className="h-1/2 bg-[#b8cfce]"></div>
       </div>
-      <div className="text-center p-4">
-        <img src={Eko} alt="Victor Elko Langi" className="w-56 h-80 md:w-64 md:h-96 object-cover rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-300 border-4 border-white" />
-        <h3 className="font-serif text-2xl mt-4">Victor Elko Langi</h3>
-        <p className="font-sans text-[#4F959D]">✞ 24 April 2024</p>
-        <p className="font-sans text-[#4F959D]">Peringatan 1 Tahun</p>
+      <div className='hidden lg:block'>
+        {/* Foto kiri, tengah layar, atasnya rounded */}
+        <div className="absolute top-1/2 left-60 transform -translate-y-1/2">
+          <img
+            src={Eko}
+            alt="Victor Elko Langi"
+            className="w-[260px] rounded-t-full object-cover"
+          />
+        </div>
+        {/* Text kanan */}
+        <div className="absolute top-1/2 right-0 transform -translate-y-1/2 pr-16 xl:w-[60%] w-[50%]  text-right text-[#1b1622]">
+          <div className='text-left'>
+            <div className="text-[#b8cfce] text-5xl font-medium">In Memoriam</div>
+            <div className="text-[#b8cfce] italic text-sm mb-6">Peringatan 1 Tahun</div>
+          </div>
+          <div className='mt-54'>
+            <div className="text-5xl font-light">Victor Elko Langi</div>
+            <div className="text-2xl mt-2">✞ 24.04.24</div>
+          </div>
+        </div>
       </div>
-    </motion.div>
-    <motion.p className="mt-7 max-w-2xl text-center text-md md:text-lg font-sans text-[#4F959D] z-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.5 }}>
-      Acara peringatan meninggalnya yang terkasih Alm. Joppy Langi (10 tahun) dan Alm. Victor Elko Langi (1 tahun)
-    </motion.p>
+      {/* Content container untuk mobile */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 lg:hidden block">
+        {/* Header text */}
+        <div className="text-center mb-8">
+          <div className="text-[#b8cfce] text-3xl md:text-4xl font-medium">In Memoriam</div>
+          <div className="text-[#b8cfce] italic text-xs md:text-sm">Peringatan 1 Tahun</div>
+        </div>
+        {/* Photo */}
+        <div className="mb-8">
+          <img
+            src={Eko}
+            alt="Victor Elko Langi"
+            className="w-48 md:w-56 rounded-t-full object-cover mx-auto"
+          />
+        </div>
+        {/* Name and date */}
+        <div className="text-center text-[#1b1622]">
+          <div className="text-3xl md:text-4xl font-light">Victor Elko Langi</div>
+          <div className="text-xl md:text-2xl mt-2">✞ 24.04.24</div>
+        </div>
+      </div>
+    </div>
+
+
+    {/* Joppy Langi */}
+    <div className="relative lg:h-[105vh] h-[110vh] font-serif text-[#1b1622] z-100">
+      {/* Bagian background 2 warna */}
+      <div className="lg:h-[105vh] h-[110vh] flex flex-col">
+        <div className="h-1/2 bg-[#1b1622]"></div>
+        <div className="h-1/2 bg-[#b8cfce]"></div>
+      </div>
+      <div className='hidden lg:block'>
+        {/* Foto kiri, tengah layar, atasnya rounded */}
+        <div className="absolute top-1/2 left-60 transform -translate-y-1/2">
+          <img
+            src={Yopi}
+            alt="Joppy Langi"
+            className="w-48 md:w-56 rounded-t-full object-cover"
+          />
+        </div>
+        {/* Text kanan */}
+        <div className="absolute top-1/2 right-0 transform -translate-y-1/2 pr-16 xl:w-[60%] w-[50%] text-right text-[#1b1622]">
+          <div className='text-left'>
+            <div className="text-[#b8cfce] text-5xl font-medium">In Memoriam</div>
+            <div className="text-[#b8cfce] italic text-sm mb-6">Peringatan 10 Tahun</div>
+          </div>
+          <div className='mt-54 '>
+            <div className="text-5xl font-light">Joppy Hendrik Langi</div>
+            <div className="text-2xl mt-2">✞ 27.03.2015</div>
+          </div>
+        </div>
+      </div>
+      {/* Content container untuk mobile */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 lg:hidden block">
+        {/* Header text */}
+        <div className="text-center mb-8">
+          <div className="text-[#b8cfce] text-3xl md:text-4xl font-medium">In Memoriam</div>
+          <div className="text-[#b8cfce] italic text-xs md:text-sm">Peringatan 10 Tahun</div>
+        </div>
+        {/* Photo */}
+        <div className="mb-8">
+          <img
+            src={Yopi}
+            alt="Joppy Langi"
+            className="w-48 md:w-56 rounded-t-full object-cover mx-auto"
+          />
+        </div>
+        {/* Name and date */}
+        <div className="text-center text-[#1b1622]">
+          <div className="text-3xl md:text-4xl font-light">Joppy Hendrik Langi</div>
+          <div className="text-xl md:text-2xl mt-2">✞ 27.03.2015</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+);
+
+const DescriptionSection = () => (
+  <div className="relative min-h-screen bg-[#1b1622] text-[#b8cfce] font-serif flex flex-col items-center justify-center px-4 text-center">
+    <div className="max-w-4xl w-full space-y-12">
+      {/* Ayat */}
+      <div className="absolute top-0 left-0 text-left z-0">
+        <div className="w-[97.5vw] lg:text-7xl md:text-6xl sm:text-5xl text-[37px] italic font-thin tracking-widest">
+          <p>KARENA BAGIKU HIDUP</p>
+          <p>ADALAH KRISTUS DAN</p>
+          <p>MATI ADALAH KEUNTUNGAN.</p>
+          <p className="text-right text-base not-italic mt-2">FILIPI 1:21</p>
+        </div>
+      </div>
+
+      {/* Undangan */}
+      <div className="absolute lg:bottom-20 md:bottom-10 sm:bottom-24 bottom-16 right-4 text-right space-y-4">
+        <p className="lg:max-w-5xl md:max-w-2xl max-w-lg lg:text-4xl md:text-3xl sm:text-2xl text-lg leading-relaxed">
+          Dengan penuh kasih, kami keluarga mengundang saudara-saudara
+          untuk bersama-sama hadir dalam acara peringatan Alm. Elko Langi dan Alm. Joppy Langi
+        </p>
+      </div>
+    </div>
   </div>
 );
+
+const InformationSection = () => {
+  return (
+    <section className="bg-[#b8cfce] text-[#1b1622] py-12">
+      <div className='max-w-5xl mx-auto text-center min-h-screen flex flex-col justify-center'>
+        <SectionTitle className='uppercase text-5xl md:text-6xl'>Waktu & Lokasi Acara</SectionTitle>
+        <div className="grid md:grid-cols-3 gap-6 text-left font-sans">
+          <div className="flex flex-col items-center font-serif text-center">
+            <img src={Flower} alt="" className='w-44 h-60' /><h3 className="text-base mb-2 flex items-center uppercase">Tempat</h3><p className='text-2xl md:text-3xl'>Bitung, Amurang, Sulawesi Utara</p></div>
+          <div className="flex flex-col items-center font-serif text-center">
+            <img src={Flower} alt="" className='w-44 h-60' /><h3 className="text-base mb-2 flex items-center uppercase">Tanggal</h3><p className='text-2xl md:text-3xl'>Minggu, 6 Juli 2025</p></div>
+          <div className="flex flex-col items-center font-serif text-center">
+            <img src={Flower} alt="" className='w-44 h-60' /><h3 className="text-base mb-2 flex items-center uppercase">Waktu</h3><p className='text-2xl md:text-3xl'>12:00 WITA - Selesai</p></div>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 const CountdownSection = () => {
   const calculateTimeLeft = () => {
@@ -129,28 +254,26 @@ const CountdownSection = () => {
     return () => clearTimeout(timer);
   });
   return (
-    <Section className="bg-[#ffffff]">
-      <SectionTitle>Waktu & Lokasi Acara</SectionTitle>
-      <div className="max-w-4xl mx-auto text-center">
-        <p className="text-lg text-[#4F959D] font-sans mb-8">Acara akan dimulai dalam:</p>
-        <div className="flex justify-center gap-4 md:gap-8 text-[#205781] mb-12">
-          {Object.entries(timeLeft).length ? Object.entries(timeLeft).map(([unit, value]) => (
-            <div key={unit} className="text-center bg-[#F6F8D5] p-4 rounded-lg shadow-md w-24">
-              <div className="text-4xl font-bold font-sans">{value}</div>
-              <div className="text-sm font-serif">{unit}</div>
-            </div>
-          )) : <span className="text-2xl font-serif text-[#4F959D]">Acara telah berlangsung.</span>}
+    <section className="min-h-screen text-[#b8cfce] bg-[#1b1622] py-12">
+      <div className='max-w-5xl mx-auto text-center flex flex-col justify-center'>
+        {/* Countdown and Maps */}
+        <div>
+          <p className="text-2xl font-serif mb-8">Acara akan dimulai dalam:</p>
+          <div className="flex justify-center gap-4 md:gap-8 mb-12">
+            {Object.entries(timeLeft).length ? Object.entries(timeLeft).map(([unit, value]) => (
+              <div key={unit} className="text-center bg-[#b8cfce] text-[#1b1622] sm:p-4 p-2 rounded-lg shadow-md sm:w-24 w-16">
+                <div className="sm:text-4xl text-3xl font-bold font-sans">{value}</div>
+                <div className="sm:text-sm text-xs font-serif">{unit}</div>
+              </div>
+            )) :
+              <span className="text-4xl font-serif">Acara telah berlangsung.</span>}
+          </div>
         </div>
-        <div className="grid md:grid-cols-3 gap-8 text-left font-sans text-[#205781]">
-          <div className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#98D2C0]"><h3 className="font-serif text-xl font-bold mb-2 flex items-center"><Calendar /> Tanggal</h3><p>Minggu, 6 Juli 2025</p></div>
-          <div className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#98D2C0]"><h3 className="font-serif text-xl font-bold mb-2 flex items-center"><Clock /> Waktu</h3><p>12:00 WITA - Selesai</p></div>
-          <div className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#98D2C0]"><h3 className="font-serif text-xl font-bold mb-2 flex items-center"><MapPin /> Lokasi</h3><p>Bitung, Amurang, Sulawesi Utara</p></div>
-        </div>
-        <div className="mt-12 rounded-lg overflow-hidden shadow-2xl border-4 border-white">
+        <div className="mt-12 rounded-lg overflow-hidden shadow-2xl border-4 border-[#b8cfce]">
           <iframe src="https://maps.google.com/maps?q=1.190609,124.581723&t=k&z=17&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style={{ border: 0 }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Peta Lokasi Acara"></iframe>
         </div>
       </div>
-    </Section>
+    </section>
   );
 };
 
@@ -179,41 +302,41 @@ const RSVPForm = ({ onRsvpSubmit }) => {
     }, 5000);
   };
   return (
-    <Section className="bg-[#F6F8D5]">
-      <SectionTitle>Konfirmasi Kehadiran</SectionTitle>
-      <div className="max-w-xl mx-auto bg-white p-8 md:p-10 rounded-xl shadow-2xl border-t-4 border-[#205781]">
+    <Section className="bg-[#b8cfce] text-[#1b1622]">
+      <SectionTitle className='sm:text-5xl text-4xl font-semibold'>Konfirmasi Kehadiran</SectionTitle>
+      <div className="max-w-xl mx-auto bg-[#EAEFEF] p-8 md:p-10 rounded-xl shadow-2xl border-t-4 border-[#7F8CAA]">
         <AnimatePresence>
           {isSubmitted ? (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-center">
-              <h3 className="font-serif text-2xl text-[#205781]">Terima Kasih!</h3>
-              <p className="text-[#4F959D] mt-2">Konfirmasi dan pesan Anda telah kami terima.</p>
+              <h3 className="font-serif text-2xl text-[#7F8CAA]">Terima Kasih!</h3>
+              <p className="text-[#7F8CAA] mt-2">Konfirmasi dan pesan Anda telah kami terima.</p>
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-[#4F959D] font-sans">Nama Lengkap</label>
-                <input type="text" name="name" id="name" required value={formData.name} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#4F959D] focus:ring-[#4F959D] sm:text-sm p-3 font-sans" />
+                <label htmlFor="name" className="block text-sm font-medium text-[#7F8CAA] font-sans">Nama Lengkap</label>
+                <input type="text" name="name" id="name" required value={formData.name} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7F8CAA] focus:ring-[#7F8CAA] sm:text-sm p-3 font-sans" />
                 {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
               </div>
               <div>
-                <label htmlFor="attendance" className="block text-sm font-medium text-[#4F959D] font-sans">Kehadiran</label>
-                <select id="attendance" name="attendance" value={formData.attendance} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#4F959D] focus:ring-[#4F959D] sm:text-sm p-3 font-sans">
+                <label htmlFor="attendance" className="block text-sm font-medium text-[#7F8CAA] font-sans">Kehadiran</label>
+                <select id="attendance" name="attendance" value={formData.attendance} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7F8CAA] focus:ring-[#7F8CAA] sm:text-sm p-3 font-sans">
                   <option>Hadir</option>
                   <option>Tidak Hadir</option>
                 </select>
               </div>
               {formData.attendance === 'Hadir' && (
                 <div>
-                  <label htmlFor="guests" className="block text-sm font-medium text-[#4F959D] font-sans">Jumlah Tamu (termasuk Anda)</label>
-                  <input type="number" name="guests" id="guests" min="1" value={formData.guests} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#4F959D] focus:ring-[#4F959D] sm:text-sm p-3 font-sans" />
+                  <label htmlFor="guests" className="block text-sm font-medium text-[#7F8CAA] font-sans">Jumlah Tamu (termasuk Anda)</label>
+                  <input type="number" name="guests" id="guests" min="1" value={formData.guests} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7F8CAA] focus:ring-[#7F8CAA] sm:text-sm p-3 font-sans" />
                 </div>
               )}
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-[#4F959D] font-sans">Pesan Kenangan / Doa (opsional)</label>
-                <textarea id="message" name="message" rows="4" value={formData.message} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#4F959D] focus:ring-[#4F959D] sm:text-sm p-3 font-sans"></textarea>
+                <label htmlFor="message" className="block text-sm font-medium text-[#7F8CAA] font-sans">Pesan Kenangan / Doa (opsional)</label>
+                <textarea id="message" name="message" rows="4" value={formData.message} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#7F8CAA] focus:ring-[#7F8CAA] sm:text-sm p-3 font-sans"></textarea>
               </div>
               <div>
-                <button type="submit" className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#205781] hover:bg-[#4F959D] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4F959D] transition-colors duration-300 font-serif text-lg">Kirim Konfirmasi</button>
+                <button type="submit" className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#333446] hover:bg-[#7F8CAA] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7F8CAA] transition-colors duration-300 font-serif">Kirim Konfirmasi</button>
               </div>
             </form>
           )}
@@ -230,15 +353,15 @@ const GuestMessages = ({ messages }) => {
   const isScrolling = true;
   const displayMessages = isScrolling ? [...messages, ...messages] : messages;
   return (
-    <Section className="bg-[#ffffff] !py-12">
+    <Section className="bg-[#b8cfce] text-[#1b1622] !py-12">
       <style>{marqueeStyle}</style>
-      <SectionTitle>Pesan & Doa</SectionTitle>
+      <SectionTitle className='sm:text-5xl text-4xl font-semibold'>Pesan & Doa</SectionTitle>
       <div className={`w-full max-w-7xl mx-auto relative ${isScrolling ? 'overflow-hidden' : ''}`} style={{ WebkitMaskImage: isScrolling ? `linear-gradient(to right, transparent, black 10%, black 90%, transparent)` : 'none', maskImage: isScrolling ? `linear-gradient(to right, transparent, black 10%, black 90%, transparent)` : 'none' }}>
         <div className={`flex ${isScrolling ? 'animate-scroll' : 'flex-wrap justify-center'}`}>
           {displayMessages.map((msg, index) => (
-            <div key={msg.id || index} className="flex-shrink-0 w-80 sm:w-96 mx-4 bg-[#F6F8D5]/70 p-6 rounded-lg shadow-lg border-l-4 border-[#98D2C0]" style={{ fontFamily: "'Cutive Mono', monospace" }}>
-              <p className="text-[#4F959D] text-md mb-4 italic">"{msg.message}"</p>
-              <p className="font-bold text-right text-[#205781]">- {msg.name}</p>
+            <div key={msg.id || index} className="flex-shrink-0 w-80 sm:w-96 mx-4 bg-[#EAEFEF]/70 p-6 rounded-lg shadow-lg border-l-4 border-[#7F8CAA]" style={{ fontFamily: "'Cutive Mono', monospace" }}>
+              <p className="text-[#7F8CAA] text-md mb-4 italic">"{msg.message}"</p>
+              <p className="font-bold text-right text-[#333446]">- {msg.name}</p>
             </div>
           ))}
         </div>
@@ -264,20 +387,33 @@ const Footer = () => {
     setTimeout(() => setCopySuccess(''), 3000);
   };
   const shareToWhatsApp = () => {
-    const message = encodeURIComponent(`Dengan penuh kasih, kami mengundang Anda untuk hadir dalam acara peringatan untuk Alm. Joppy Langi & Alm. Elko Langi. Info selengkapnya: ${window.location.href}`);
+    const message = encodeURIComponent(`Shalom, damai sejahtera dalam kasih Kristus,
+
+Dengan penuh rasa syukur dan iman kepada Tuhan Yesus Kristus, kami keluarga Langi Piay mengundang Bapak/Ibu/Saudara/Saudari untuk hadir dalam ibadah peringatan 1 (satu) tahun berpulangnya Bapak Victor Elko  dan 10 (sepuluh) tahun berpulangnya Bapak Joppy H Langi
+
+Ibadah ini merupakan ungkapan syukur dan pengenangan akan kasih dan teladan mereka semasa hidup, sekaligus memohon kerukunan dalam keluarga.
+
+Kehadiran Bapak/Ibu/Saudara/Saudari akan menjadi berkat dan sukacita tersendiri bagi kami keluarga. Atas perhatian dan kebersamaan dalam kasih Kristus, kami mengucapkan terima kasih.
+
+Tuhan Yesus memberkati.
+
+Hormat kami,
+Kel Langi Piay. 
+
+Info selengkapnya: ${window.location.href}`);
     window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
   };
   return (
-    <footer className="bg-[#205781] text-white py-12 px-6">
+    <footer className="text-[#b8cfce] bg-[#1b1622] py-12 px-6">
       <div className="max-w-4xl mx-auto text-center font-sans">
-        <p className="font-serif text-2xl text-[#F6F8D5] mb-2">Dengan Penuh Kasih & Syukur,</p>
-        <p className="text-lg text-[#98D2C0] mb-6">Keluarga Besar Langi-Piay</p>
+        <p className="font-serif text-2xl text-[#EAEFEF] mb-2">Dengan Penuh Kasih & Syukur,</p>
+        <p className="text-lg text-[#B8CFCE] mb-6">Keluarga Besar Langi-Piay</p>
         <div className="flex justify-center items-center gap-4 mb-4">
           <button onClick={shareToWhatsApp} className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white font-bold py-2 px-4 rounded-full transition-colors"><WhatsAppIcon /> Bagikan ke WhatsApp</button>
           <button onClick={copyToClipboard} className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white font-bold py-2 px-4 rounded-full transition-colors"><CopyIcon /> Salin Tautan</button>
         </div>
-        {copySuccess && <p className="text-sm text-[#98D2C0]">{copySuccess}</p>}
-        <p className="text-xs text-[#98D2C0]/70 mt-8">"Jawab Yesus, 'Akulah kebangkitan dan hidup; barangsiapa percaya kepada-Ku, ia akan hidup walaupun ia sudah mati, dan setiap orang yang hidup dan percaya kepada-Ku, tidak akan mati selama-lamanya.'" - Yohanes 11:25-26</p>
+        {copySuccess && <p className="text-sm text-[#B8CFCE]">{copySuccess}</p>}
+        <p className="text-xs text-[#B8CFCE]/70 mt-8">"Jawab Yesus, 'Akulah kebangkitan dan hidup; barangsiapa percaya kepada-Ku, ia akan hidup walaupun ia sudah mati, dan setiap orang yang hidup dan percaya kepada-Ku, tidak akan mati selama-lamanya.'" - Yohanes 11:25-26</p>
       </div>
     </footer>
   );
@@ -391,6 +527,8 @@ const AdminPage = ({ rsvps }) => {
 const InvitationPage = ({ onRsvpSubmit, messages }) => (
   <main className="bg-white font-sans">
     <HeroSection />
+    <DescriptionSection />
+    <InformationSection />
     <CountdownSection />
     <RSVPForm onRsvpSubmit={onRsvpSubmit} />
     <GuestMessages messages={messages} />
@@ -450,7 +588,7 @@ export default function App() {
   };
 
   if (loading && user === undefined) {
-    return <div className="min-h-screen flex items-center justify-center font-serif text-xl text-[#205781]">Memuat Undangan...</div>;
+    return <div className="min-h-screen flex items-center justify-center font-serif text-xl text-[#B8CFCE]">Memuat Undangan...</div>;
   }
 
   return (
