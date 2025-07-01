@@ -208,7 +208,7 @@ const DescriptionSection = () => (
       <div className="absolute lg:bottom-20 md:bottom-10 sm:bottom-24 bottom-16 right-4 text-right space-y-4">
         <p className="lg:max-w-5xl md:max-w-2xl max-w-lg lg:text-4xl md:text-3xl sm:text-2xl text-lg leading-relaxed">
           Dengan penuh kasih, kami keluarga mengundang saudara-saudara
-          untuk bersama-sama hadir dalam acara peringatan Alm. Elko Langi dan Alm. Joppy Langi
+          untuk bersama-sama hadir dalam acara peringatan meninggalnya Alm. Elko Langi dan Alm. Joppy Langi
         </p>
       </div>
     </div>
